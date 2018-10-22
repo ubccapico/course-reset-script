@@ -6,7 +6,11 @@ To script the "Course Reset" button already available in Canvas, without deletin
 - A Canvas API Token
 - The course ID of the course you are resetting
 <<<<<<< HEAD
+<<<<<<< HEAD
 : for example: for https://ubc.instructure.com/courses/1326, 1326 is the course id
+=======
+- for example: for https://ubc.instructure.com/courses/1326, 1326 is the course id
+>>>>>>> cd7c40062d8cc6efd71a4e2cbcc0f8fd3d1d5ab2
 =======
 - for example: for https://ubc.instructure.com/courses/1326, 1326 is the course id
 >>>>>>> cd7c40062d8cc6efd71a4e2cbcc0f8fd3d1d5ab2
