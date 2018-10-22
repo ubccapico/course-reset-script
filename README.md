@@ -5,7 +5,7 @@ To script the "Course Reset" button already available in Canvas, without deletin
 - Python 3
 - A Canvas API Token
 - The course ID of the course you are resetting
-: for example: for https://ubc.instructure.com/courses/1326, 1326 is the course id
+=> for example: for https://ubc.instructure.com/courses/1326, 1326 is the course id
 ## How to use the script:
 1. Open the "token.txt" file and paste your Canvas API Token. Save the file.
 2. Open the script using Python 3 IDLE
