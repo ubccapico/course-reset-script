@@ -1,16 +1,19 @@
-# Canvas "Course Reset" Script
+# Canvas Course Reset Script
+ 
+This script will delete the contents of a course without deleting the course shell. This updated script now features a new graphical user interface that will make it easier for users to interact with the script. 
 
-## Purpose: 
-To script the "Course Reset" button already available in Canvas, without deleting the current course shell. This script deletes everything in the course you provide the script. Once the script is complete your course should be identical to a new Canvas course shell. 	
+## User Interface Design
 
-## Requirements:
-- Python 3
-- A Canvas API Token
+## Getting Started
+
+### Requirements:
+- Python 3.9 or later - can be downloaded from [here](https://www.python.org/getit/)
+- [Canvas API Token](https://learninganalytics.ubc.ca/for-students/canvas-api/)
 - The course ID of the course you are resetting
-=> for example: for https://canvas.ubc.ca/courses/1326, 1326 is the course id
+> Ex. For https://canvas.ubc.ca/courses/1326, 1326 is the Course ID
 
-## How to get a Canvas API token
-1. Log-in to https://canvas.ubc.ca.
+### How to get a Canvas API token
+1. Log in to [Canvas](https://canvas.ubc.ca).
 2. Click on **Account** on the left hand Global Navigation menu.
 3. Click on **Settings**. 
 
@@ -20,17 +23,18 @@ To script the "Course Reset" button already available in Canvas, without deletin
 
 ![new_access_token](https://github.com/jguarin16/screenshots/blob/master/access_token_button.png)
 
-5. Provide a purpose under the **Purpose feed**, then click on the **Generate Token** icon. 
+5. Provide a purpose under the **Purpose** field, then click on the **Generate Token** button. 
 
 ![access-token-window](https://github.com/jguarin16/screenshots/blob/master/access_token_window.png)
 
-6. Copy and Paste the token provided to you onto a secure/encrypted text file in your local machine. Once you close this window, you will not be able to access the token again, so please be careful where you save your text file.
+6. Copy and paste the token provided to you onto a secure/encrypted text file in your local machine. Once you close this window, you will not be able to access the token again, so please remember where you save your token.
 
 ![access-token-details](https://github.com/jguarin16/screenshots/blob/master/save_token.png)
 
-## How to use the script:
-1. Open the "accesstoken.py" file using Notepad and paste your Canvas API Token in the **access_token** field. Save the file.
-2. Right-click on the main.py script and select **Edit with IDLE** > **Edit with IDLE 3.10**.
-3. Select **Run** > **Run Module**.
-4. Fill in the prompts in the application window to proceed with the course reset.
-5. Once the script has finished running, a pop-up window will show a summary of what has been deleted. There is also a **Go to Course** button that will redirect you to the Canvas course page so that you may review the course.
+## Running the Python Script:
+1. Clone the repository into your local computer.
+2. Open the [`accesstoken.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/accesstoken.py) file using Notepad or Visual Studio Code and paste your Canvas API Token in the `access_token` field. Save the file.
+3. Right-click on the [`main.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/main.py) script and select **Edit with IDLE** > **Edit with IDLE 3.10**.
+4. Select **Run** > **Run Module**.
+5. Fill in the prompts in the application window to proceed with the course reset.
+6. Once the script has finished running, a pop-up window will show a summary of what has been deleted. There is also a **Go to Course** button that will redirect you to the Canvas course page so that you may review the course.
