@@ -161,11 +161,6 @@ def confirmation_window():
         course_name = course.name
         global course_code
         course_code = course.course_code
-        
-        # Shows a warning if course is already available to students
-        if course.workflow_state == 'available':
-            availability_label = Label(window, text="*Please note that the course you chose is already available to students.", fg = "red")
-            availability_label.grid(column=0, row=4, sticky=W, padx=5, pady=5)
             
     except Exception as e:
         # remove the hashtag below to see where the error occurs
@@ -176,9 +171,9 @@ def confirmation_window():
     # Display confirmation window
     delete_confirmation = messagebox.askquestion(
             "Delete All Content",
-            "Course Name: %s \nCourse Code: %s \nAre you sure you want to delete ALL course content for this course?" %(course_name, course_code),
+            "Course Name: %s \nCourse Code: %s \nPlease note that the course you chose is currently %s to students\n\nAre you sure you want to delete ALL course content for this course?" 
+            %(course_name, course_code, course.workflow_state),
             icon='warning')
-
     try:
         if delete_confirmation == 'yes':
             # Delete previous window
