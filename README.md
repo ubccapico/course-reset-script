@@ -1,34 +1,55 @@
-# Canvas "Course Reset" Script
+# Canvas Course Reset Script
+ 
+This script will delete the contents of a course without deleting the course shell. This updated script also features a graphical user interface that will make it easier for users to interact with the script. 
 
-## Purpose: 
-To script the "Course Reset" button already available in Canvas, without deleting the current course shell. This script deletes everything in the course you provide the script. Once the script is complete your course should be identical to a new Canvas course shell. 	
+## User Interface Design
+<p align="left">
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/app-window.png" alt="Start Window" width="250"/>
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/progress-window.png" alt="Progress Window" width="500"/>
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/summary-window.png" alt="Summary Window" width="250"/>
+</p>
 
-## Requirements:
-- Python 3
-- A Canvas API Token
+
+## Getting Started
+
+### Requirements:
+- Python 3.9 or later - can be downloaded from [here](https://www.python.org/getit/)
+- [Canvas API Token](https://learninganalytics.ubc.ca/for-students/canvas-api/)
 - The course ID of the course you are resetting
-=> for example: for https://ubc.instructure.com/courses/1326, 1326 is the course id
+> Ex. For https://canvas.ubc.ca/courses/1326, 1326 is the Course ID
 
-## How to get a Canvas API token
-1. Log-in to canvas.ubc.ca
-2. Click on "Account" on the left hand Global Navigation menu
-3. Click on "Settings" 
+### How to get a Canvas API token
+1. Log in to [Canvas](https://canvas.ubc.ca).
+2. Click on **Account** on the Global Navigation menu.
+3. Select **Settings**. 
 
-![settings](https://github.com/jguarin16/screenshots/blob/master/account_settings.png)
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/canvas_settings.png" alt="Steps 2 and 3 on how to get a Canvas API token" width="250"/>
 
-4. Scroll to the very bottom of the page, then click on the ![new_access_token](https://github.com/jguarin16/screenshots/blob/master/access_token_button.png) button
-5. Provide a purpose under the "Purpose feed", then click on "Generate Token"
+4. Under the **Approved Integrations** section, click on the **+ New Access Token** button.
 
-![access-token-window](https://github.com/jguarin16/screenshots/blob/master/access_token_window.png)
+<img src="https://github.com/jguarin16/screenshots/blob/master/access_token_button.png" alt="New Access Token button" width="150"/>
 
-6. Copy and Paste the token provided to you onto a secure/encrypted text file in your local machine. Once you close this window, you will not be able to access the token again, so please be careful where you save your text file.
+5. In the pop-up window, fill in the **Purpose** field.
+6. Click on the **Generate Token** button. 
 
-![access-token-details](https://github.com/jguarin16/screenshots/blob/master/save_token.png)
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/access_token.png" alt="Steps 5 and 6 on how to get a Canvas API token" width="275"/>
 
-## How to use the script:
-1. Open the "token.txt" file and paste your Canvas API Token. Save the file.
-2. Open the script using Python 3 IDLE
-3. Run the script
-4. You will be prompted to enter the course id of your course in the console of the IDLE
-5. Enter "y" to continue
-6. The script is complete once you see a "Done" message on the console
+7. Copy and paste the token provided to you onto a secure text file on your local machine. 
+
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/token_details.png" alt="Access Token Details" width="350"/>
+
+> Note: Once you close this window, you will not be able to access this token again. Therefore, a new token will need to be generated if you lose your current one.
+
+## Running the Python Script:
+1. Clone the repository into your local computer.
+2. Open the [`accesstoken.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/accesstoken.py) file using Notepad or Visual Studio Code and paste your Canvas API Token in the `access_token` field. Save the file.
+3. Right-click on the [`main.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/main.py) script and select **Edit with IDLE** > **Edit with IDLE 3.10**.
+
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/edit_with_IDLE.png" alt="Step 3 on how to Run the Python Script" width="350"/>
+
+4. Click **Run** > **Run Module**.
+
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/run_module.png" alt="Step 4 on how to Run the Python Script" width="200"/>
+
+5. Fill in the prompts in the application window and click **Submit** to proceed with the course reset.
+6. Once the script has finished running, a pop-up window will show a summary of what has been deleted. There is also a **Go to Course** button that will redirect you to the Canvas course page so that you may review the course.
