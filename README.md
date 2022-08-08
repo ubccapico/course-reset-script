@@ -40,9 +40,17 @@ This script will delete the contents of a course without deleting the course she
 
 > Note: Once you close this window, you will not be able to access this token again. Therefore, a new token will need to be generated if you lose your current one.
 
-## Running the Python Script:
+### Setting up the environment:
 1. Clone the repository into your local computer.
-2. Open the [`accesstoken.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/accesstoken.py) file using Notepad or Visual Studio Code and paste your Canvas API Token in the `access_token` field. Save the file.
+2. Install the libraries needed by running a pip install in the terminal.
+
+```
+pip install -r requirements.txt
+```
+
+## Running the Python Script:
+1. Open the [`accesstoken.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/accesstoken.py) file using Notepad or Visual Studio Code 
+2. Copy and paste your Canvas API Token in the `access_token` field. Then, save the file.
 3. Right-click on the [`main.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/main.py) script and select **Edit with IDLE** > **Edit with IDLE 3.10**.
 
 <img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/edit_with_IDLE.png" alt="Step 3 on how to Run the Python Script" width="350"/>
