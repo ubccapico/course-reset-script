@@ -14,6 +14,9 @@ This script will delete the contents of a course without deleting the course she
 
 ### Requirements:
 - Python 3.9 or later - can be downloaded from [here](https://www.python.org/getit/)
+
+> Please ensure that the **Add Python 3.X to PATH**	checkbox is checked
+
 - [Canvas API Token](https://learninganalytics.ubc.ca/for-students/canvas-api/)
 - The course ID of the course you are resetting
 > Ex. For https://canvas.ubc.ca/courses/1326, 1326 is the Course ID
@@ -41,7 +44,7 @@ This script will delete the contents of a course without deleting the course she
 > Note: Once you close this window, you will not be able to access this token again. Therefore, a new token will need to be generated if you lose your current one.
 
 ### Setting up the environment:
-1. Clone the repository into your local computer.
+1. Clone the [repository](https://github.com/ubccapico/course-reset-script/archive/refs/heads/master.zip) into your local computer.
 2. Install the libraries needed by running a pip install in the terminal.
 
 ```
@@ -49,7 +52,7 @@ pip install -r requirements.txt
 ```
 
 ## Running the Python Script:
-1. Open the [`accesstoken.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/accesstoken.py) file using Notepad or Visual Studio Code 
+1. Open the [`accesstoken.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/accesstoken.py) file using Notepad or Visual Studio Code. 
 2. Copy and paste your Canvas API Token in the `access_token` field. Then, save the file.
 3. Right-click on the [`main.py`](https://github.com/ubccapico/course-reset-script/blob/with-gui/main.py) script and select **Edit with IDLE** > **Edit with IDLE 3.10**.
 
