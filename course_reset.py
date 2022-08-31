@@ -17,49 +17,6 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-
-def delete_external_tools ():
-    percent_complete = float(0)
-    total_num = 0
-    ids = {}
-    to_be_deleted_full_json = []
-    to_be_deleted_items = requests.get(init.base_url+ '/api/v1/courses/' + init.course_id + '/external_tools/',
-                                           headers= {'Authorization': 'Bearer ' + init.access_token})
-
-    while True:
-        to_be_deleted_items_json = json.loads(to_be_deleted_items.text)
-        to_be_deleted_full_json += to_be_deleted_items_json
-
-        num = len(to_be_deleted_items_json)
-        total_num += num
-        
-        for x in range(num):
-            ids[to_be_deleted_items_json[x][u'id']] = to_be_deleted_items_json[x][u'name']
-            
-        if to_be_deleted_items.links['current']['url'] == to_be_deleted_items.links['last']['url']:
-            break
-        else:
-            to_be_deleted_items = requests.get(to_be_deleted_items.links['next']['url'],
-                                               headers= {'Authorization': 'Bearer ' + init.access_token})
-
-    if total_num == 0:
-        print("There are no external tools to be deleted\n")
-    else:
-        print("There are " + str(total_num) + " external tools to be deleted")
-        percent_inc = float(1 / total_num) * 100.0
-        for x in ids.keys():
-            to_be_deleted_items = requests.get(init.base_url + '/api/v1/courses/' + init.course_id + '/external_tools/' + str(x),
-                                                   headers= {'Authorization': 'Bearer ' + init.access_token})
-            to_be_deleted_items_json = json.loads(to_be_deleted_items.text)
-            to_be_deleted_items = requests.delete(init.base_url + '/api/v1/courses/' + init.course_id + '/external_tools/' + str(x),
-                                                      headers= {'Authorization': 'Bearer ' + init.access_token})
-                
-            percent_complete += percent_inc 
-            print("External Tools: "+str(int(percent_complete)) +"% Complete!")
-               
-    print("Finished with External Tools\n")
-    return total_num
-
 """
     Function to calculate the number of items to be deleted
 """
@@ -370,7 +327,6 @@ def reset_nav(course):
 
     print ("Finished resetting Course Navigation.\n") 
 
-
 """
     Function to set up Course deletion summary window
 """
@@ -388,63 +344,50 @@ def delete_course():
 
     # Create a new window
     progress = Tk()
-    progress.title("Course Reset Script Summary")
-    progress.geometry("400x600")
+    progress.title("Canvas Course Reset")
+    progress.geometry("400x400")
     progress.configure(bg = "#FFFFFF")
 
     # Create the graphical user interface
     interface = ui(progress,
-                    bg = "#623593",
-                    height = 600,
+                    bg = "#FFFFFF",
+                    height = 400,
                     width = 400,
-                    bd = 0,
+                    bd = 1,
                     highlightthickness = 0,
                     relief = "ridge")
     interface.place(x = 0, y = 0)
-    interface.create_rectangle(
-                    0.0,
-                    131.65354919433594,
-                    400.0,
-                    630.7401580810547,
-                    fill="#FFFFFF",
-                    outline="")
-
-    # Add Task Graphic
-    complete_img = PhotoImage(
-    file=relative_to_assets("complete_img.png"))
-    complete_img_icon = interface.create_image(
-                    61.92643737792969,
-                    71.08662033081055,
-                    image=complete_img)
 
     # Add Text
     interface.create_text(
-                    92.87376403808594,
-                    51.56693649291992,
-                    anchor="nw",
-                    text="COURSE RESET COMPLETE!",
-                    fill="#FFFFFF",
-                    font=("Oswald SemiBold", 24 * -1))
-
-    interface.create_text(
                     200,
-                    152.07,
+                    30.07,
                     justify = "center",
-                    text="Summary of Course Reset:",
-                    fill="#623593",
-                    font=("Orienta Regular", 18 * -1))
+                    text="Reset Complete for",
+                    fill="#422869",
+                    font=("Arial", 18 * -1))
 
     interface.create_text(
                     200,
-                    172.07,
+                    55.07,
                     justify = "center",
                     text= ("%s" %course.name),
-                    fill="#623593",
-                    font=("Orienta Regular", 18 * -1))
+                    fill="#422869",
+                    font=("Arial", 18 * -1))
+    """
+    Function that changes the style of the button when the cursor is over it
+    """
+    def on_enter(e):
+       course_btn.config(image = course_btn_img_hover)
+
+    def on_leave(e):
+       course_btn.config(image = course_btn_img)
 
     # Create a "Go to Course" Button
     course_btn_img = PhotoImage(
                     file=relative_to_assets("course_btn.png"))
+    course_btn_img_hover = PhotoImage(
+                    file=relative_to_assets("course_btn_hover.png"))
     course_btn = Button(
                     image=course_btn_img,
                     borderwidth=0,
@@ -453,23 +396,22 @@ def delete_course():
                     relief="flat")
     course_btn.place(
                     x=103.82807159423828,
-                    y=536.0708618164062,
+                    y=340.0,
                     width=192.34384155273438,
                     height=49.18896484375)
+    course_btn.bind('<Enter>', on_enter)
+    course_btn.bind('<Leave>', on_leave)
 
     # Create a Frame that displays the Course Reset Summary
     liFrame =ttk.Frame(progress, width=40,height=10)
     liFrame.place(
         x=30.71,
-        y=189.10,
-        width=338.58,
-        height=326.74)
+        y=75.00,
+        width=338,
+        height=250.00)
 
-    scrollbar = ttk.Scrollbar(liFrame)
-    completionList = Listbox(liFrame,width=50,height=15,yscrollcommand=scrollbar.set)
-    scrollbar.configure(command=completionList.yview)
-    completionList.pack (side="left")
-    scrollbar.pack(side="right", fill="y")   
+    completionList = Listbox(liFrame,width=338,height=250)
+    completionList.pack (side="left")  
 
     """
         Function to delete course contents
@@ -479,43 +421,41 @@ def delete_course():
         progressList =[]
 
         for to_be_deleted in components_to_be_deleted:    
-            if to_be_deleted == 'announcements':
+            if to_be_deleted == 'Announcements':
                 num_deleted = delete_announcements(course)
-            elif to_be_deleted == 'discussion_topics':
+            elif to_be_deleted == 'Discussion Topics':
                 num_deleted = delete_discussions(course)
-            elif to_be_deleted == 'quizzes':
+            elif to_be_deleted == 'Quizzes':
                 num_deleted = delete_quizzes(course)
-            elif to_be_deleted == 'modules':
+            elif to_be_deleted == 'Modules':
                 num_deleted = delete_modules(course)
-            elif to_be_deleted == 'assignments':
+            elif to_be_deleted == 'Assignments':
                 num_deleted = delete_assignments(course)
-            elif to_be_deleted == 'assignment_groups':
+            elif to_be_deleted == 'Assignment Groups':
                 num_deleted = delete_assignment_groups(course)
-            elif to_be_deleted == 'files':
+            elif to_be_deleted == 'Files':
                 num_deleted = delete_files(course)
-            elif to_be_deleted == 'folders':
+            elif to_be_deleted == 'Folders':
                 num_deleted = delete_folders(course)
-            elif to_be_deleted == 'pages':
+            elif to_be_deleted == 'Pages':
                 num_deleted = delete_pages(course)
-            elif to_be_deleted == 'groups':
+            elif to_be_deleted == 'Groups':
                 num_deleted = delete_groups(course)
-            elif to_be_deleted == 'calendar_events':
+            elif to_be_deleted == 'Calendar Events':
                 num_deleted = delete_calendar_events(canvas, course)
-            elif to_be_deleted == 'external_tools':
-                num_deleted = delete_external_tools ()
 
-            progressList.append("Finished deleting %s %s" %(num_deleted, to_be_deleted))
-            completionList.insert('end',"Finished deleting %s %s" %(num_deleted, to_be_deleted))    
+            progressList.append("%s (%s)" %(to_be_deleted, num_deleted))
+            completionList.insert('end',"%s (%s)" %(to_be_deleted, num_deleted))    
 
         # Remove Syllabus
         reset_syllabus(course)
-        progressList.append("Finished deleting syllabus")
-        completionList.insert('end',"Finished deleting Syllabus")  
+        progressList.append("Syllabus")
+        completionList.insert('end',"Syllabus")  
 
         # Reset Course Navigation
         reset_nav(course)
-        progressList.append("Finished reseting navigation")
-        completionList.insert('end',"Finished reseting Course Navigation")   
+        progressList.append("Navigation")
+        completionList.insert('end',"Course Navigation")   
 
         # Modify Course Settings
         course.update(course={'event':'claim',                          # Unpublish Course
@@ -527,18 +467,17 @@ def delete_course():
                                 show_announcements_on_home_page = False,        # Disable Showing Announcements on Home Page
                                 default_due_time = "23:59:59")                  # Set Default Due Time to 11:59:59 PM
     
-    components_to_be_deleted = ['announcements',
-                                'discussion_topics',
-                                'quizzes',
-                                'modules',
-                                'assignments',
-                                'assignment_groups',
-                                'files',
-                                'folders',
-                                'calendar_events',
-                                'groups',
-                                'pages',
-                                'external_tools']
+    components_to_be_deleted = ['Announcements',
+                                'Discussion Topics',
+                                'Quizzes',
+                                'Modules',
+                                'Assignments',
+                                'Assignment Groups',
+                                'Files',
+                                'Folders',
+                                'Calendar Events',
+                                'Groups',
+                                'Pages']
     
     reset_course(canvas, course)
 

@@ -11,13 +11,13 @@ from tkinter import Canvas as ui
 
 # Create the base window for the GUI
 window = Tk()
-window.title("Course Reset Script")
-window.geometry("400x600")
-window.configure(bg = "#623593")
+window.title("Canvas Course Reset")
+window.geometry("400x570")
+window.configure(bg = "#6829C2")
 
 # Create the graphical user interface
 interface = ui(window,
-                bg = "#623593",
+                bg = "#6829C2",
                 height = 600,
                 width = 400,
                 bd = 0,
@@ -30,7 +30,7 @@ interface.create_rectangle(
     0.0,
     275,
     400,
-    600,
+    570,
     fill="#FFFFFF",
     outline="")
 
@@ -39,27 +39,18 @@ rst_icon = PhotoImage(
     file=rst_module.relative_to_assets("refresh_img.png"))
 rst_icon_img = interface.create_image(
     200.0,
-    128.0,
+    149.0,
     image=rst_icon
 )
 
 # Add text
 interface.create_text(
     200,
-    240.0,
-    justify = "center",
-    text="CANVAS COURSE RESET",
-    fill="#FFFFFF",
-    font=("Oswald SemiBold", 25 * -1)
-)
-
-interface.create_text(
-    200,
     307.0,
     justify = "center",
-    text="CANVAS ACCESS TOKEN",
+    text="Canvas Access Token",
     fill="#623593",
-    font=("Oswald SemiBold", 18 * -1)
+    font=("Arial", 18 * -1)
 )
 
 # Create the background for the prompts
@@ -74,15 +65,14 @@ token_entry_bg = interface.create_image(
 # Create a Access Token Field
 token_entry = Entry(
     bd=0,
-    bg="#E5D3F0",
     highlightthickness=0,
     show="*"
 )
 token_entry.place(
     x=85.77464294433594,
-    y=326.0,
+    y=329.0,
     width=230.45071411132812,
-    height=38.549285888671875
+    height=33.0
 )
 # Display Access token if it exists in accesstoken.py
 token_entry.insert(0, init.access_token)
@@ -112,9 +102,9 @@ interface.create_text(
     200,
     420.0,
     justify = "center",
-    text="COURSE CODE",
+    text="Course ID",
     fill="#623593",
-    font=("Oswald SemiBold", 18 * -1)
+    font=("Arial", 18 * -1)
 )
 
 courseID_entry_bg = interface.create_image(
@@ -124,14 +114,13 @@ courseID_entry_bg = interface.create_image(
 )
 courseID_entry = Entry(
     bd=0,
-    bg="#E5D3F0",
     highlightthickness=0
 )
 courseID_entry.place(
     x=84.77464294433594,
-    y=438.0,
+    y=443.0,
     width=230.45071411132812,
-    height=38.549285888671875
+    height=33.0
 )
 
 """
@@ -171,9 +160,10 @@ def confirmation_window():
     # Display confirmation window
     delete_confirmation = messagebox.askquestion(
             "Delete All Content",
-            "Course Name: %s \nCourse Code: %s \nPlease note that the course you chose is currently %s to students\n\nAre you sure you want to delete ALL course content for this course?" 
+            "Course Name: %s \nCourse Code: %s \nPlease note that the course you chose is currently %s to students\n\nAre you sure you want to delete ALL course content for this course?"
             %(course_name, course_code, course.workflow_state),
             icon='warning')
+
     try:
         if delete_confirmation == 'yes':
             # Delete previous window
@@ -188,9 +178,22 @@ def confirmation_window():
         print('Unable to proceed with course reset.\n If any problem still persists, restart the program, delete the deets file, and try again.')
         messagebox.showinfo("Error","Course Reset Unsuccessful.",icon="error")
 
+"""
+    Function that changes the style of the button when the cursor is over it
+"""
+def on_enter(e):
+   submit_btn.config(image = submit_btn_img_hover)
+
+def on_leave(e):
+   submit_btn.config(image = submit_btn_img)
+   
 # Create a "Submit" Button
 submit_btn_img = PhotoImage(
     file=rst_module.relative_to_assets("submit_btn.png"))
+
+submit_btn_img_hover = PhotoImage(
+    file=rst_module.relative_to_assets("submit_btn_hover.png"))
+
 submit_btn = Button(
     image=submit_btn_img,
     borderwidth=0,
@@ -198,30 +201,15 @@ submit_btn = Button(
     command=confirmation_window
 )
 submit_btn.place(
-    x=123.62466430664062,
-    y=505.0,
-    width=152.75064086914062,
-    height=34.93865966796875
+    x=109.84,
+    y=497.36,
+    width=180.32,
+    height=42.04
 )
 
-# Create a "Cancel" Button
-cancel_btn_img = PhotoImage(
-    file=rst_module.relative_to_assets("cancel_btn.png"))
-cancel_btn = Button(
-    image=cancel_btn_img,
-    borderwidth=0,
-    highlightthickness=0,
-    command=window.destroy
-)
-cancel_btn.place(
-    x=123.65109252929688,
-    y=545.0,
-    width=152.69784545898438,
-    height=36.40576171875
-)
+submit_btn.bind('<Enter>', on_enter)
+submit_btn.bind('<Leave>', on_leave)
 
 window.resizable(False, False)
 window.mainloop()
-
-
 
