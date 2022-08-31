@@ -4,9 +4,9 @@ This script will delete the contents of a course without deleting the course she
 
 ## User Interface Design
 <p align="left">
-<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/app-window.png" alt="Start Window" width="250"/>
-<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/progress-terminal.png" alt="Progress Window" width="400"/>
-<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/completion-window.png" alt="Summary Window" width="250"/>
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/main-window.png" alt="Start Window" width="270"/>
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/progress-terminal.png" alt="Progress Window" width="390"/>
+<img src="https://github.com/ckpaz12/readme-images/blob/main/artsisit/completion-window.png" alt="Summary Window" width="330"/>
 </p>
 
 
